@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app/auth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  // final User? user = Auth().currentUser;
+
+  // Future<void> signOut() async {
+  //   await Auth().signout();
+  // }
+
+  // Widget _userId() {
+  //   return Text(user?.email ?? "User email");
+  // }
+
+  // Widget _signOutButton() {
+  //   return ElevatedButton(
+  //     onPressed: signOut,
+  //     child: const Text('Sign Out')
+  //   );
+  // }
 
   @override
   State<HomePage> createState() => _HomePageState();
