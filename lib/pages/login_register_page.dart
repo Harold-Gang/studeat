@@ -62,6 +62,13 @@ class _LoginPageState extends State<LoginPage> {
                 labelText: "email"
               ),
             ),
+            TextField(
+              controller: _controllerPassword,
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: "password"
+              ),
+            ),
             Text(errorMessage == '' ? '' : 'Humm ? $errorMessage'),
             ElevatedButton(
               onPressed: isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,

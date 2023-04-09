@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app/widget_tree.dart';
 
 import 'firebase_options.dart';
 
@@ -20,9 +21,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const RootPage(),
+      home: const WidgetTree(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Colors.orange),
     );
   }
 }

@@ -5,35 +5,37 @@ import 'package:app/auth.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
-  // final User? user = Auth().currentUser;
-
-  // Future<void> signOut() async {
-  //   await Auth().signout();
-  // }
-
-  // Widget _userId() {
-  //   return Text(user?.email ?? "User email");
-  // }
-
-  // Widget _signOutButton() {
-  //   return ElevatedButton(
-  //     onPressed: signOut,
-  //     child: const Text('Sign Out')
-  //   );
-  // }
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
 
+  final User? user = Auth().currentUser;
+
+  Future<void> signOut() async {
+    await Auth().signout();
+  }
+  
+  _signOutButton() {
+    return ElevatedButton(
+      onPressed: signOut,
+      child: const Text('Sign Out')
+    );
+  }
+
+  _userId() {
+    return Text(user?.email ?? "User email");
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
           child: Column(
-            children: [
+            children: <Widget> [
+              _signOutButton(),
               const Padding(
                 padding: EdgeInsets.only(right: 180), //apply padding to some sides only
                 child: Text("Demain,", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
@@ -42,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(right: 10), //apply padding to some sides only
                 child: Text("on mange sain 🥦", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
               ),
+              _userId(),
               Row(
                 children: const [
                   Padding(
