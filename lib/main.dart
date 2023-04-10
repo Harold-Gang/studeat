@@ -1,7 +1,15 @@
-import 'package:app/home_page.dart';
+import 'package:app/pages/home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:app/widget_tree.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -11,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const RootPage(),
+      home: const WidgetTree(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
     );
@@ -34,16 +42,13 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  List<Widget> pages = const [
-    HomePage(),
+  List<Widget> pages = [
+    const HomePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Studeat'),
-      // ),
       body: pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -59,10 +64,6 @@ class _RootPageState extends State<RootPage> {
             icon: Icon(Icons.restaurant_rounded),
             label: 'Cuisiner',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.verified_user_outlined),
-          //   label: 'Profile',
-          // ),
         ],
         currentIndex: currentPage,
         selectedItemColor: Colors.amber[800],
