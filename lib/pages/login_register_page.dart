@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                       controller: _controllerEmail,
                       decoration: const InputDecoration(
                         filled: true,
-                        fillColor: Color(0xfff5f5f5),
+                        fillColor: Color.fromARGB(255, 240, 240, 240),
                         labelText: "Email",
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey)
@@ -81,18 +81,33 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _controllerPassword,
                         obscureText: passwordVisible,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color.fromARGB(255, 240, 240, 240),
+                          fillColor: const Color.fromARGB(255, 240, 240, 240),
                           labelText: "Mot de passe",
-                          enabledBorder: UnderlineInputBorder(
+                          enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.grey)
+                          ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              });
+                            },
+                            icon: Icon(passwordVisible ? Icons.visibility_off : Icons.visibility)
                           )
                         ),
                       ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 5, left: 5),
+                      child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('*minimum 8 caractères et 1 caractère spécial', style: TextStyle(color: Color.fromARGB(255, 75, 75, 75), fontSize: 12),)
+                      )
                     ),
                     Text(errorMessage == '' ? '' : 'Humm ? $errorMessage'),
                   ],
@@ -104,12 +119,12 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    child: Text(isLogin ? 'Valider' : 'Register', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    child: Text(isLogin ? 'Valider' : 'Valider', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   ),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10, right: 30),
                 child: 
                   TextButton(
                     onPressed: () {
