@@ -39,7 +39,7 @@ Widget itemBuilder(BuildContext context, int index) {
       },
       child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+          // mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Stack(children: [

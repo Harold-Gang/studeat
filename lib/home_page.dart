@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Container(
-                        height: 400,
+                        height: 364,
                         decoration: const BoxDecoration(
                             border: Border(
                                 top: BorderSide(
