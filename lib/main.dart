@@ -1,4 +1,5 @@
 import 'package:app/home_page.dart';
+import 'package:app/profile_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,17 +35,18 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  List<Widget> pages = const [
+  static const List<Widget> pages = <Widget> [
     HomePage(),
+    ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Studeat'),
-      // ),
-      body: pages[currentPage],
+      body: IndexedStack(
+        index: currentPage,
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -52,17 +54,9 @@ class _RootPageState extends State<RootPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_outlined),
-            label: 'Favoris',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_rounded),
-            label: 'Cuisiner',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.verified_user_outlined),
-          //   label: 'Profile',
-          // ),
         ],
         currentIndex: currentPage,
         selectedItemColor: Colors.amber[800],
