@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/profile_infos.dart';
 
 class ProfilePage extends StatelessWidget {
 const ProfilePage({ Key? key }) : super(key: key);
@@ -13,7 +14,7 @@ const ProfilePage({ Key? key }) : super(key: key);
           children: [
             const Padding(
               padding: EdgeInsets.only(
-                  top: 50, left: 20),
+                  top: 10, left: 20),
               child: Text("Compte",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
@@ -41,22 +42,30 @@ const ProfilePage({ Key? key }) : super(key: key);
               child: Divider(thickness: 1, color: Colors.black),
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Icon(Icons.person_outline_rounded, size: 25,),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(),
-                  child: Text("Mes informations"),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 120),
-                  child: Icon(Icons.keyboard_arrow_right, size: 35,),
-                )
-              ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfileInfos())
+                 );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Icon(Icons.person_outline_rounded, size: 25,),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(),
+                    child: Text("Mes informations"),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 120),
+                    child: Icon(Icons.keyboard_arrow_right, size: 35,),
+                  )
+                ],
+              ),
             ),
 
             const Padding(
@@ -158,7 +167,6 @@ const ProfilePage({ Key? key }) : super(key: key);
                 child: const Text('Me déconnecter', style: TextStyle(color: Colors.red),)
               ),
             )
-            
           ]
         ),
       )
