@@ -43,27 +43,18 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-<<<<<<< HEAD
-  List<Widget> pages = [
-    const HomePage(),
-=======
   static const List<Widget> pages = <Widget> [
     HomePage(),
     ProfilePage()
->>>>>>> FEAT/profile-mesInfos
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      body: pages[currentPage],
-=======
       body: IndexedStack(
         index: currentPage,
         children: pages,
       ),
->>>>>>> FEAT/profile-mesInfos
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -74,13 +65,6 @@ class _RootPageState extends State<RootPage> {
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
-<<<<<<< HEAD
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_rounded),
-            label: 'Cuisiner',
-          ),
-=======
->>>>>>> FEAT/profile-mesInfos
         ],
         currentIndex: currentPage,
         selectedItemColor: Colors.amber[800],
