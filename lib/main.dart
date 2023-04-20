@@ -1,5 +1,6 @@
 import 'package:app/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:app/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget_tree.dart';
 
@@ -42,14 +43,27 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
+<<<<<<< HEAD
   List<Widget> pages = [
     const HomePage(),
+=======
+  static const List<Widget> pages = <Widget> [
+    HomePage(),
+    ProfilePage()
+>>>>>>> FEAT/profile-mesInfos
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       body: pages[currentPage],
+=======
+      body: IndexedStack(
+        index: currentPage,
+        children: pages,
+      ),
+>>>>>>> FEAT/profile-mesInfos
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -57,13 +71,16 @@ class _RootPageState extends State<RootPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_outlined),
-            label: 'Favoris',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
+<<<<<<< HEAD
           BottomNavigationBarItem(
             icon: Icon(Icons.restaurant_rounded),
             label: 'Cuisiner',
           ),
+=======
+>>>>>>> FEAT/profile-mesInfos
         ],
         currentIndex: currentPage,
         selectedItemColor: Colors.amber[800],
