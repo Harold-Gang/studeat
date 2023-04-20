@@ -1,3 +1,4 @@
+import 'package:app/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.amber),
       home: const RootPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
     );
   }
 }
@@ -26,26 +27,47 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
+
+  void _changePage(int index) {
+    setState(() {
+      currentPage = index;
+    });
+  }
+
+  List<Widget> pages = const [
+    HomePage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('StudEat'),
+      // appBar: AppBar(
+      //   title: const Text('Studeat'),
+      // ),
+      body: pages[currentPage],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border_outlined),
+            label: 'Favoris',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_rounded),
+            label: 'Cuisiner',
+          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.verified_user_outlined),
+          //   label: 'Profile',
+          // ),
+        ],
+        currentIndex: currentPage,
+        selectedItemColor: Colors.amber[800],
+        onTap: _changePage,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          debugPrint('Action');
-        },
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: NavigationBar(
-        destinations: const [
-        NavigationDestination(icon: Icon(Icons.newspaper), label: 'News'),
-        NavigationDestination(icon: Icon(Icons.book), label: 'Recipe'),
-        NavigationDestination(icon: Icon(Icons.cookie), label: 'Meal'),
-        NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
-
-        ],),
     );
   }
 }
