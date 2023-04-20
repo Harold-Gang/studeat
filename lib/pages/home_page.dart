@@ -16,8 +16,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.only(
-                  right: 180), //apply padding to some sides only
+              padding: EdgeInsets.only(right: 180),
               child: Text("Demain,",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                             border: Border(
                                 top: BorderSide(
                                     color: Colors.grey, width: 0.5))),
-                        child: const TabBarView(children: <Widget>[
+                        child: TabBarView(children: <Widget>[
                           HomePagelist(),
                           HomePagelist(),
                           HomePagelist(),
