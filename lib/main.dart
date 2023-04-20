@@ -43,8 +43,8 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  static const List<Widget> pages = <Widget> [
-    HomePage(),
+  final List<Widget> pages = <Widget> [
+    const HomePage(),
     ProfilePage()
   ];
 

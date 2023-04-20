@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/profile_infos.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app/auth.dart';
 
 class ProfilePage extends StatelessWidget {
-const ProfilePage({ Key? key }) : super(key: key);
+ProfilePage({ Key? key }) : super(key: key);
+
+   final User? user = Auth().currentUser;
+
+  _userId() {
+    return Text(user?.email ?? "User email");
+  }
 
   @override
   Widget build(BuildContext context){
@@ -30,13 +38,7 @@ const ProfilePage({ Key? key }) : super(key: key);
               child: Text("Tom Louveau",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             ),
-            const Padding(
-              padding: EdgeInsets.only(
-                  left: 20),
-              child: Text("tom.louveau@edu.devinci.fr",
-                  style: TextStyle(fontSize: 15)),
-            ),
-
+            _userId(),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Divider(thickness: 1, color: Colors.black),
