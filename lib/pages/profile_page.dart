@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/profile_infos.dart';
+import 'package:app/pages/command_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:app/auth.dart';
 
@@ -87,7 +88,15 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Divider(thickness: 1, color: Colors.black),
             ),
-            Row(
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CommandePage())
+                 );
+              },
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
                 Padding(
@@ -109,6 +118,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                 )
               ],
+            ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
