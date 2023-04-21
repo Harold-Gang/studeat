@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/profile_infos.dart';
+import 'package:app/pages/command_page.dart';
 
 class ProfilePage extends StatelessWidget {
 const ProfilePage({ Key? key }) : super(key: key);
@@ -73,7 +74,14 @@ const ProfilePage({ Key? key }) : super(key: key);
               child: Divider(thickness: 1, color: Colors.black),
             ),
 
-            Row(
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CommandePage())
+                 );
+              },
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
                 Padding(
@@ -90,7 +98,7 @@ const ProfilePage({ Key? key }) : super(key: key);
                 )
               ],
             ),
-
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
