@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/meal_page.dart';
+import 'package:app/pages/meal_page.dart';
 
 class HomePagelist extends StatefulWidget {
   const HomePagelist({super.key});

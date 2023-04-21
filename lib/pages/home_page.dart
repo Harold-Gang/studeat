@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:app/home_list.dart';
+import 'package:app/pages/home_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,16 +21,14 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
             const Padding(
-              padding:
-                  EdgeInsets.only(right: 10), //apply padding to some sides only
+              padding: EdgeInsets.only(right: 10),
               child: Text("on mange sain 🥦",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
             Row(
               children: const [
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: 15, bottom: 25), //apply padding to some sides only
+                  padding: EdgeInsets.only(left: 15, bottom: 25),
                   child: Icon(Icons.location_pin, color: Colors.grey),
                 ),
                 Padding(
@@ -64,6 +62,8 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Container(
                         child: const TabBar(
+                          indicatorPadding:
+                              EdgeInsets.symmetric(horizontal: 20),
                           labelColor: Colors.black,
                           unselectedLabelColor: Colors.grey,
                           indicatorColor: Colors.black,
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                             border: Border(
                                 top: BorderSide(
                                     color: Colors.grey, width: 0.5))),
-                        child: TabBarView(children: <Widget>[
+                        child: const TabBarView(children: <Widget>[
                           HomePagelist(),
                           HomePagelist(),
                           HomePagelist(),

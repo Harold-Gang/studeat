@@ -1,7 +1,16 @@
-import 'package:app/home_page.dart';
+import 'package:app/pages/home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:app/pages/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:app/widget_tree.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -11,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const RootPage(),
+      home: const WidgetTree(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
     );
@@ -34,17 +43,18 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  List<Widget> pages = const [
-    HomePage(),
+  final List<Widget> pages = <Widget> [
+    const HomePage(),
+    ProfilePage()
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Studeat'),
-      // ),
-      body: pages[currentPage],
+      body: IndexedStack(
+        index: currentPage,
+        children: pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -52,17 +62,9 @@ class _RootPageState extends State<RootPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border_outlined),
-            label: 'Favoris',
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_rounded),
-            label: 'Cuisiner',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.verified_user_outlined),
-          //   label: 'Profile',
-          // ),
         ],
         currentIndex: currentPage,
         selectedItemColor: Colors.amber[800],
