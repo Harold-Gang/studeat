@@ -9,7 +9,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,22 +16,19 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.only(
-                  right: 180),
+              padding: EdgeInsets.only(right: 180),
               child: Text("Demain,",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
             const Padding(
-              padding:
-                  EdgeInsets.only(right: 10),
+              padding: EdgeInsets.only(right: 10),
               child: Text("on mange sain 🥦",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
             Row(
               children: const [
                 Padding(
-                  padding: EdgeInsets.only(
-                      left: 15, bottom: 25),
+                  padding: EdgeInsets.only(left: 15, bottom: 25),
                   child: Icon(Icons.location_pin, color: Colors.grey),
                 ),
                 Padding(
@@ -66,7 +62,8 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Container(
                         child: const TabBar(
-                          indicatorPadding: EdgeInsets.symmetric(horizontal: 20),
+                          indicatorPadding:
+                              EdgeInsets.symmetric(horizontal: 20),
                           labelColor: Colors.black,
                           unselectedLabelColor: Colors.grey,
                           indicatorColor: Colors.black,
@@ -92,7 +89,6 @@ class _HomePageState extends State<HomePage> {
                     ]))
           ],
         ),
-        
       ),
     );
   }

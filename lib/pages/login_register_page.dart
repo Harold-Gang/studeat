@@ -20,9 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> signInWithEmailAndPassword() async {
     try {
       await Auth().signInWithEmailAndPassword(
-        email: _controllerEmail.text,
-        password: _controllerPassword.text
-      );
+          email: _controllerEmail.text, password: _controllerPassword.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -33,9 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> createUserWithEmailAndPassword() async {
     try {
       await Auth().createUserWithEmailAndPassword(
-        email: _controllerEmail.text,
-        password: _controllerPassword.text
-      );
+          email: _controllerEmail.text, password: _controllerPassword.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -45,7 +41,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -57,11 +52,13 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Column(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(40),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Text("Se connecter", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
+                  child: Text(isLogin ? "Se connecter" : "Créer un compte",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
                 ),
               ),
               Container(
@@ -71,13 +68,11 @@ class _LoginPageState extends State<LoginPage> {
                     TextField(
                       controller: _controllerEmail,
                       decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 240, 240, 240),
-                        labelText: "Email",
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey)
-                        )
-                      ),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 240, 240),
+                          labelText: "Email",
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey))),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
@@ -85,30 +80,32 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _controllerPassword,
                         obscureText: passwordVisible,
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 240, 240, 240),
-                          labelText: "Mot de passe",
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey)
-                          ),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                passwordVisible = !passwordVisible;
-                              });
-                            },
-                            icon: Icon(passwordVisible ? Icons.visibility_off : Icons.visibility)
-                          )
-                        ),
+                            filled: true,
+                            fillColor: const Color.fromARGB(255, 240, 240, 240),
+                            labelText: "Mot de passe",
+                            enabledBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.grey)),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    passwordVisible = !passwordVisible;
+                                  });
+                                },
+                                icon: Icon(passwordVisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility))),
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 5, left: 5),
-                      child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('*minimum 8 caractères et 1 caractère spécial', style: TextStyle(color: Color.fromARGB(255, 75, 75, 75), fontSize: 12),)
-                      )
-                    ),
+                        margin: const EdgeInsets.only(top: 5, left: 5),
+                        child: const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '*minimum 8 caractères et 1 caractère spécial',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 75, 75, 75),
+                                  fontSize: 12),
+                            ))),
                     Text(errorMessage == '' ? '' : 'Humm ? $errorMessage'),
                   ],
                 ),
@@ -116,33 +113,41 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 margin: const EdgeInsets.only(left: 200, top: 50),
                 child: ElevatedButton(
-                  onPressed: isLogin ? signInWithEmailAndPassword : createUserWithEmailAndPassword,
+                  onPressed: isLogin
+                      ? signInWithEmailAndPassword
+                      : createUserWithEmailAndPassword,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                    child: Text(isLogin ? 'Valider' : 'Valider', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 15),
+                    child: Text(
+                      isLogin ? 'Valider' : 'Valider',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 10, right: 30),
-                child: 
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        isLogin = !isLogin;
-                      });
-                    },
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(isLogin ? "🌽 Pas encore de compte ? Je m'inscris" : "🌽 J'ai déjà un compte", style: const TextStyle(color: Colors.grey),),
-                    )
-                  )
-              )
+                  margin: const EdgeInsets.only(top: 10, right: 30),
+                  child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          isLogin = !isLogin;
+                        });
+                      },
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          isLogin
+                              ? "🌽 Pas encore de compte ? Je m'inscris"
+                              : "🌽 J'ai déjà un compte",
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      )))
             ],
           )
         ],
       ),
     );
-
   }
 }

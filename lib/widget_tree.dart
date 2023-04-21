@@ -45,34 +45,36 @@ class _WidgetTreeState extends State<WidgetTree> {
                   LoginPage(),
                 ];
 
-          return Scaffold(
-            body: _children[_currentIndex],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: onTabTapped,
-              items: _loggedIn
-                  ? const [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.supervised_user_circle),
-                        label: 'Profile',
-                      ),
-                    ]
-                  : const [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.login),
-                        label: 'Login',
-                      ),
-                    ],
-            ),
-          );
+          return _loggedIn
+              ? Scaffold(
+                  body: _children[_currentIndex],
+                  bottomNavigationBar: BottomNavigationBar(
+                    currentIndex: _currentIndex,
+                    onTap: onTabTapped,
+                    items: _loggedIn
+                        ? const [
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.home),
+                              label: 'Home',
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.supervised_user_circle),
+                              label: 'Profile',
+                            ),
+                          ]
+                        : const [
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.home),
+                              label: 'Home',
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.login),
+                              label: 'Login',
+                            ),
+                          ],
+                  ),
+                )
+              : LoginPage();
         }
       },
     );
