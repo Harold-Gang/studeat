@@ -1,8 +1,10 @@
+import 'package:app/models/user_model.dart';
+import 'package:app/pages/home_page.dart';
 import 'package:app/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../auth.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -45,9 +47,29 @@ class _RegisterPageState extends State<RegisterPage> {
   postDetailsToFirestore() async {
     //calling firestore
 
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    User? user = Auth().currentUser;
+
     //calling our user model
 
+    UserModel userModel = UserModel();
+
     //sending user data
+
+    userModel.email = user!.email;
+    userModel.uid = user.uid;
+    userModel.firstName = firstNameController.text;
+    userModel.lastName = lastNameController.text;
+    userModel.age = ageController.text;
+    userModel.classe = classeController.text;
+
+    firebaseFirestore.collection("users").doc(userModel.uid).set(userModel.toMap());
+    Fluttertoast.showToast(msg: "Account created successfully");
+
+    //redirection
+
+    Navigator.pushAndRemoveUntil((context), MaterialPageRoute(builder: (context) => const HomePage()), (route) => false);
+
   }
 
   @override
@@ -247,7 +269,9 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     final signUpButton = ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        createUserWithEmailAndPassword();
+      },
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
         child: Text('Valider', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
@@ -260,7 +284,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 100, left: 30, bottom: 20),
+                padding: EdgeInsets.only(top: 70, left: 30, bottom: 15),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Créer un compte", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
@@ -273,7 +297,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(top: 20),
+                        margin: const EdgeInsets.only(top: 10),
                         child: firstNameField
                       ),
                       Container(

@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   String? uid;
   String? firstName;
   String? lastName;
@@ -6,11 +6,11 @@ class User {
   String? classe;
   String? email;
 
-  User({this.uid, this.firstName, this.lastName, this.email, this.age, this.classe});
+  UserModel({this.uid, this.firstName, this.lastName, this.email, this.age, this.classe});
 
   //receive data from server
-  factory User.fromMap(map) {
-    return User(
+  factory UserModel.fromMap(map) {
+    return UserModel(
       uid: map['uid'],
       email: map['email'],
       firstName: map['firstName'],
