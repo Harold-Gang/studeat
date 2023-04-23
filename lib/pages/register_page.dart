@@ -18,6 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool passwordVisible = true;
   bool confirmPasswordVisible = true;
+  bool isLoading = false;
   String? errorMessage = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -33,11 +34,18 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void createUserWithEmailAndPassword() async {
     if(_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+      await Future.delayed(const Duration(seconds: 3));
       await Auth().createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text
       ).then((value) => {
-        postDetailsToFirestore()
+        postDetailsToFirestore(),
+        setState(() {
+          isLoading = false;
+        }),
       }).catchError((e) => {
         Fluttertoast.showToast(msg: e!.message)
       });
@@ -278,77 +286,92 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
 
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 70, left: 30, bottom: 15),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Créer un compte", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
-                ),
-              ),
-              Form(
-                key: _formKey,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: firstNameField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: lastNameField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: ageField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: classeField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: emailField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: passwordField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        child: confirmPasswordField
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 0, top: 50),
-                        child: signUpButton
-                      ),
-                    ],
+    return Stack(
+      children: [
+        Scaffold(
+          body: Column(
+            children: <Widget>[
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 70, left: 30, bottom: 15),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text("Créer un compte", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10, right: 30),
-                child: 
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
-                    },
-                    child: const Align(
-                      alignment: Alignment.center,
-                      child: Text("🌽 J'ai déjà un compte", style: TextStyle(color: Colors.grey),),
-                    )
+                  Form(
+                    key: _formKey,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            child: firstNameField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: lastNameField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: ageField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: classeField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: emailField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: passwordField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: confirmPasswordField
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 0, top: 50),
+                            child: signUpButton
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, right: 30),
+                    child: 
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                        },
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: Text("🌽 J'ai déjà un compte", style: TextStyle(color: Colors.grey),),
+                        )
+                      )
                   )
+                ],
               )
             ],
-          )
-        ],
-      ),
+          ),
+        ),
+
+      if(isLoading)
+        const Opacity(
+          opacity: 0.8,
+          child: ModalBarrier(dismissible: false, color: Colors.black),
+        ),
+      if(isLoading)
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ],
+
     );
   }
 }
