@@ -1,7 +1,7 @@
 import 'package:app/auth.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/pages/profile_page.dart';
-import 'package:app/pages/login_register_page.dart';
+import 'package:app/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTree extends StatefulWidget {
@@ -36,7 +36,7 @@ class _WidgetTreeState extends State<WidgetTree> {
           _loggedIn = snapshot.data ?? false;
 
           _children = [
-            HomePage(),
+            const HomePage(),
             ProfilePage(),
           ];
 
@@ -61,7 +61,7 @@ class _WidgetTreeState extends State<WidgetTree> {
                     ),
                   ),
                 )
-              : LoginPage();
+              : const LoginPage();
         }
       },
     );
