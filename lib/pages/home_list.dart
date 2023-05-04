@@ -51,7 +51,10 @@ class _PlatsInformationState extends State<PlatsInformation> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const MealPage()));
+                          builder: (context) => const MealPage(),
+                          settings: RouteSettings(
+                            arguments: data,
+                          )));
                 },
                 child: Container(
                   decoration: const BoxDecoration(
