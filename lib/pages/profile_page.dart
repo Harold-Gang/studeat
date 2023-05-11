@@ -59,9 +59,9 @@ class ProfilePage extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const ProfileInfos()));
               },
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
+                children: [
                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Icon(
@@ -87,9 +87,9 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Divider(thickness: 1, color: Colors.black),
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.only(left: 20),
                   child: Icon(
@@ -110,9 +110,9 @@ class ProfilePage extends StatelessWidget {
                 )
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.only(left: 20),
                   child: Icon(
@@ -133,9 +133,9 @@ class ProfilePage extends StatelessWidget {
                 )
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.only(left: 18),
                   child: Icon(
@@ -160,9 +160,9 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Divider(thickness: 1, color: Colors.black),
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.only(left: 40),
                   child: Text("A propos de"),
@@ -176,9 +176,9 @@ class ProfilePage extends StatelessWidget {
                 )
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Padding(
                   padding: EdgeInsets.only(left: 40),
                   child: Text("Mentions"),

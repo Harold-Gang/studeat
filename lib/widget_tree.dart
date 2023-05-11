@@ -37,7 +37,7 @@ class _WidgetTreeState extends State<WidgetTree> {
 
           _children = _loggedIn
               ? [
-                  HomePage(),
+                  const HomePage(),
                   ProfilePage(),
                 ]
               : const [
@@ -74,7 +74,7 @@ class _WidgetTreeState extends State<WidgetTree> {
                           ],
                   ),
                 )
-              : LoginPage();
+              : const LoginPage();
         }
       },
     );

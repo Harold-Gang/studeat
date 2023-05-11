@@ -53,12 +53,12 @@ class _LoginPageState extends State<LoginPage> {
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(40),
+                padding: const EdgeInsets.all(40),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(isLogin ? "Se connecter" : "Créer un compte",
                       style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
+                          const TextStyle(fontWeight: FontWeight.w900, fontSize: 40)),
                 ),
               ),
               Container(
