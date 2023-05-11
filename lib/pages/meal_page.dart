@@ -9,18 +9,9 @@ class MealPage extends StatefulWidget {
 }
 
 class _MealPageState extends State<MealPage> {
-  List<String> ingredients = [
-    "Carottes",
-    "Pommes de terre",
-    "Viande",
-    "Fromage",
-    "Légumes",
-    "Oeufs",
-    "Lait",
-    "Tomates",
-    "Concombres",
-    "Avocats",
-  ];
+  bool isToggled = false;
+  bool? isChecked = false;
+  List<String> ingredients = [];
 
   void _goToOrder() {
     Navigator.push(
@@ -31,6 +22,11 @@ class _MealPageState extends State<MealPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    // push to ingredients list the ingredients from the database
+    // convert string to array, separate by comma, remove the space
+    ingredients = data['ingredients'].split(', ');
     return Scaffold(
       body: ListView(
         children: [
@@ -40,13 +36,13 @@ class _MealPageState extends State<MealPage> {
               children: [
                 Stack(alignment: Alignment.bottomRight, children: [
                   Image.network(
-                    'https://picsum.photos/500',
+                    data['image'],
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: 300.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
+                  const Padding(
+                    padding: EdgeInsets.all(20.0),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -63,35 +59,35 @@ class _MealPageState extends State<MealPage> {
                   ),
                 ]),
                 Container(
+                  padding: const EdgeInsets.all(0.0),
+                  alignment: Alignment.topLeft,
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                         size: 30,
                       ),
                     ),
                   ),
-                  padding: const EdgeInsets.all(0.0),
-                  alignment: Alignment.topLeft,
                 )
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(20),
-            child: Text('Hachis Parmentier',
-                style: TextStyle(
+            padding: const EdgeInsets.all(20),
+            child: Text(data['name'],
+                style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
                     color: Colors.black,
                     decoration: TextDecoration.none)),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text('🐛 Aux insectes',
                 style: TextStyle(
@@ -106,13 +102,13 @@ class _MealPageState extends State<MealPage> {
               width: 20,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
+                    backgroundColor: isToggled ? Colors.blue : Colors.black,
                   ),
                   onPressed: _goToOrder,
                   child: const Text("Je réserve")),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(20),
             child: Row(
               children: [
@@ -133,14 +129,14 @@ class _MealPageState extends State<MealPage> {
               ],
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: Divider(
               color: Colors.black,
               thickness: 1,
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(20),
             child: Text('Ingrédients :',
                 style: TextStyle(
@@ -150,34 +146,34 @@ class _MealPageState extends State<MealPage> {
                     decoration: TextDecoration.none)),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 40),
+            padding: const EdgeInsets.only(left: 40),
             child: Column(
                 children: ingredients.map((ingr) {
               return Row(children: [
-                Text(
+                const Text(
                   "\u2022",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Text(
                     ingr,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 )
               ]);
             }).toList()),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Divider(
               color: Colors.black,
               thickness: 1,
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(20),
             child: Text('Ce plat est cuisiné par :',
                 style: TextStyle(
@@ -194,6 +190,8 @@ class _MealPageState extends State<MealPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
+                    padding: const EdgeInsets.all(0.0),
+                    alignment: Alignment.center,
                     child: SizedBox(
                       width: 75,
                       height: 75,
@@ -205,11 +203,9 @@ class _MealPageState extends State<MealPage> {
                         ),
                       ),
                     ),
-                    padding: const EdgeInsets.all(0.0),
-                    alignment: Alignment.center,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 15),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.min,
@@ -236,14 +232,14 @@ class _MealPageState extends State<MealPage> {
                   )
                 ]),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Divider(
               color: Colors.black,
               thickness: 1,
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(20),
             child: Text('Commentaires :',
                 style: TextStyle(
@@ -252,7 +248,7 @@ class _MealPageState extends State<MealPage> {
                     color: Colors.black,
                     decoration: TextDecoration.none)),
           ),
-          Padding(
+          const Padding(
               padding: EdgeInsets.only(left: 40),
               child: Row(children: [
                 Text(
