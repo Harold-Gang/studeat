@@ -1,7 +1,7 @@
 import 'package:app/auth.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/pages/profile_page.dart';
-import 'package:app/pages/login_register_page.dart';
+import 'package:app/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTree extends StatefulWidget {
@@ -35,43 +35,30 @@ class _WidgetTreeState extends State<WidgetTree> {
         } else {
           _loggedIn = snapshot.data ?? false;
 
-          _children = _loggedIn
-              ? [
-                  const HomePage(),
-                  ProfilePage(),
-                ]
-              : const [
-                  HomePage(),
-                  LoginPage(),
-                ];
+          _children = [
+            const HomePage(),
+            ProfilePage(),
+          ];
 
           return _loggedIn
               ? Scaffold(
                   body: _children[_currentIndex],
-                  bottomNavigationBar: BottomNavigationBar(
-                    currentIndex: _currentIndex,
-                    onTap: onTabTapped,
-                    items: _loggedIn
-                        ? const [
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.home),
-                              label: 'Home',
-                            ),
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.supervised_user_circle),
-                              label: 'Profile',
-                            ),
-                          ]
-                        : const [
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.home),
-                              label: 'Home',
-                            ),
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.login),
-                              label: 'Login',
-                            ),
-                          ],
+                  bottomNavigationBar: Container(
+                    height: MediaQuery.of(context).size.height * 0.07,
+                    child: BottomNavigationBar(
+                      currentIndex: _currentIndex,
+                      onTap: onTabTapped,
+                      items: const [
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.home_outlined),
+                          label: 'Accueil',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.account_circle_outlined),
+                          label: 'Compte',
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : const LoginPage();

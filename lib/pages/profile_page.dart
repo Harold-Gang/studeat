@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/profile_infos.dart';
+import 'package:app/pages/command_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:app/auth.dart';
 
@@ -87,28 +88,36 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Divider(thickness: 1, color: Colors.black),
             ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 25,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CommandePage()));
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Icon(
+                      Icons.shopping_bag_outlined,
+                      size: 25,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(),
-                  child: Text("Mes commandes"),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 120),
-                  child: Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 35,
+                  Padding(
+                    padding: EdgeInsets.only(),
+                    child: Text("Mes commandes"),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(left: 120),
+                    child: Icon(
+                      Icons.keyboard_arrow_right,
+                      size: 35,
+                    ),
+                  )
+                ],
+              ),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/pages/order_page.dart';
 
 class MealPage extends StatefulWidget {
   const MealPage({super.key});
@@ -11,6 +12,13 @@ class _MealPageState extends State<MealPage> {
   bool isToggled = false;
   bool? isChecked = false;
   List<String> ingredients = [];
+
+  void _goToOrder() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const OrderPage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +104,7 @@ class _MealPageState extends State<MealPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isToggled ? Colors.blue : Colors.black,
                   ),
-                  onPressed: () {},
+                  onPressed: _goToOrder,
                   child: const Text("Je réserve")),
             ),
           ),
