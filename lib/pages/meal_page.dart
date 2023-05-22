@@ -108,10 +108,10 @@ class _MealPageState extends State<MealPage> {
                   child: const Text("Je réserve")),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(20),
+          Padding(
+            padding: const EdgeInsets.all(20),
             child: Row(
-              children: [
+              children: const [
                 Text('Ce plat sera remis en main propre le 3 avril à : ',
                     style: TextStyle(
                         fontSize: 15,
@@ -204,13 +204,13 @@ class _MealPageState extends State<MealPage> {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 15),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
+                        children: const <Widget> [
                           Text(
                             "Jordan C.",
                             style: TextStyle(
@@ -248,9 +248,9 @@ class _MealPageState extends State<MealPage> {
                     color: Colors.black,
                     decoration: TextDecoration.none)),
           ),
-          const Padding(
-              padding: EdgeInsets.only(left: 40),
-              child: Row(children: [
+          Padding(
+              padding: const EdgeInsets.only(left: 40),
+              child: Row(children: const [
                 Text(
                   "\u2022",
                   style: TextStyle(fontSize: 18),

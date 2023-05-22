@@ -25,8 +25,8 @@ class _HomePageState extends State<HomePage> {
               child: Text("on mange sain 🥦",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
             ),
-            const Row(
-              children: [
+            Row(
+              children: const [
                 Padding(
                   padding: EdgeInsets.only(left: 15, bottom: 25),
                   child: Icon(Icons.location_pin, color: Colors.grey),
