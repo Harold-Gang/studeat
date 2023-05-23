@@ -13,13 +13,6 @@ class _MealPageState extends State<MealPage> {
   bool? isChecked = false;
   List<String> ingredients = [];
 
-  void _goToOrder() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const OrderPage()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> data =
@@ -104,7 +97,13 @@ class _MealPageState extends State<MealPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isToggled ? Colors.blue : Colors.black,
                   ),
-                  onPressed: _goToOrder,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const OrderPage(),
+                      settings: RouteSettings(arguments: data)),
+                    );
+                  },
                   child: const Text("Je réserve")),
             ),
           ),

@@ -31,6 +31,7 @@ dependencies:
   email_validator: ^2.0.1
   flutter:
     sdk: flutter
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -40,6 +41,7 @@ dependencies:
   firebase_auth: ^4.4.0
   cloud_firestore: ^4.5.2
   fluttertoast: ^8.2.1
+  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:

@@ -14,6 +14,10 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Map<String, dynamic> plat =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
     return Scaffold(
       body: ListView(children: [
         Align(
@@ -48,10 +52,10 @@ class _OrderPageState extends State<OrderPage> {
             thickness: 1,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20, top: 20),
-          child: Text('Hachis Parmentier',
-              style: TextStyle(
+        Padding(
+          padding: const EdgeInsets.only(left: 20, top: 20),
+          child: Text(plat["name"],
+              style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
