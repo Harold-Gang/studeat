@@ -14,7 +14,6 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final Map<String, dynamic> plat =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
@@ -102,10 +101,10 @@ class _OrderPageState extends State<OrderPage> {
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20),
-          child: Text('IIM',
-              style: TextStyle(
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Text(plat["place"],
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
@@ -195,18 +194,18 @@ class _OrderPageState extends State<OrderPage> {
         ),
         Padding(
             padding: const EdgeInsets.only(left: 40),
-            child: Row(children: const [
-              Text(
+            child: Row(children: [
+              const Text(
                 "\u2022",
                 style: TextStyle(fontSize: 18),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                 child: Text(
-                  "Ceci est un commentaire",
-                  style: TextStyle(fontSize: 18),
+                  plat["commentaire"] ?? '',
+                  style: const TextStyle(fontSize: 18),
                 ),
               )
             ])),

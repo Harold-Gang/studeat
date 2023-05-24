@@ -75,12 +75,12 @@ class _PlatsInformationState extends State<PlatsInformation> {
                     subtitle: Text(data['ingredients'],
                         maxLines: 1, overflow: TextOverflow.ellipsis),
                     leading: Image.network(
-                      data['image'],
+                      // data image or url
+                      data['image'] ?? "https://picsum.photos/250?image=9",
                       width: 80,
                       height: 100,
                       fit: BoxFit.cover,
                     ),
-                    trailing: Text(data['price'] + '€'),
                   ),
                 ));
           }).toList(),

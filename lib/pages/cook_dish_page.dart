@@ -1,16 +1,19 @@
+import 'package:app/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+import 'home_page.dart';
+
 class CookDishPage extends StatefulWidget {
-  const CookDishPage({ Key? key }) : super(key: key);
+  const CookDishPage({Key? key}) : super(key: key);
 
   @override
   _CookDishPageState createState() => _CookDishPageState();
 }
 
 class _CookDishPageState extends State<CookDishPage> {
-
   final _formKey = GlobalKey<FormState>();
   DateTime? _selectedDate;
 
@@ -21,7 +24,6 @@ class _CookDishPageState extends State<CookDishPage> {
   final dateController = TextEditingController();
   String selectedPortion = 'Nombre de portion(s)';
   final commentaireController = TextEditingController();
-
 
   List<String> portions = [
     'Nombre de portion(s)',
@@ -34,23 +36,20 @@ class _CookDishPageState extends State<CookDishPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final dishNameField = TextFormField(
       controller: dishNameController,
       autofocus: false,
       decoration: const InputDecoration(
-        filled: true,
-        fillColor: Color.fromARGB(255, 240, 240, 240),
-        labelText: "Nom du plat cuisiné*",
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey)
-        )
-      ),
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Nom du plat cuisiné*",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       onSaved: (value) {
         dishNameController.text = value!;
       },
       validator: (value) {
-        if(value!.isEmpty) {
+        if (value!.isEmpty) {
           return ("Remplissez le champ Nom du plat");
         }
         return null;
@@ -63,18 +62,16 @@ class _CookDishPageState extends State<CookDishPage> {
       controller: ingredientsController,
       autofocus: false,
       decoration: const InputDecoration(
-        filled: true,
-        fillColor: Color.fromARGB(255, 240, 240, 240),
-        labelText: "Liste des ingrédients*",
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey)
-        )
-      ),
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Liste des ingrédients*",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       onSaved: (value) {
         ingredientsController.text = value!;
       },
       validator: (value) {
-        if(value!.isEmpty) {
+        if (value!.isEmpty) {
           return ("Remplissez le champ liste des ingrédients");
         }
         return null;
@@ -87,18 +84,16 @@ class _CookDishPageState extends State<CookDishPage> {
       controller: placeController,
       autofocus: false,
       decoration: const InputDecoration(
-        filled: true,
-        fillColor: Color.fromARGB(255, 240, 240, 240),
-        labelText: "Lieu de rendez-vous*",
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey)
-        )
-      ),
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Lieu de rendez-vous*",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       onSaved: (value) {
         placeController.text = value!;
       },
       validator: (value) {
-        if(value!.isEmpty) {
+        if (value!.isEmpty) {
           return ("Remplissez le champ Lieu de rendez-vous");
         }
         return null;
@@ -111,67 +106,60 @@ class _CookDishPageState extends State<CookDishPage> {
       controller: dateController,
       autofocus: false,
       decoration: const InputDecoration(
-        filled: true,
-        fillColor: Color.fromARGB(255, 240, 240, 240),
-        labelText: "Heure de rendez-vous*",
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey)
-        )
-      ),
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Heure de rendez-vous*",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       onTap: () {
-            DatePicker.showDateTimePicker(
-              context,
-              showTitleActions: true,
-              onConfirm: (date) {
-                setState(() {
-                  _selectedDate = date;
-                  dateController.text =
-                      DateFormat('yyyy-MM-dd HH:mm').format(date);
-                });
-              },
-              currentTime: DateTime.now(),
-              locale: LocaleType.fr, // Specify your language preference here
-            );
+        DatePicker.showDateTimePicker(
+          context,
+          showTitleActions: true,
+          onConfirm: (date) {
+            setState(() {
+              _selectedDate = date;
+              dateController.text = DateFormat('yyyy-MM-dd HH:mm').format(date);
+            });
           },
+          currentTime: DateTime.now(),
+          locale: LocaleType.fr, // Specify your language preference here
+        );
+      },
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.name,
     );
 
     final portionsField = DropdownButtonFormField(
-                value: selectedPortion,
-                onChanged: (String? value) {
-                  setState(() {
-                    selectedPortion = value!;
-                  });
-                },
-                items: portions.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 240, 240, 240),
-                  labelText: "",
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey)
-                  )
-                ),
-              );
+      value: selectedPortion,
+      onChanged: (String? value) {
+        setState(() {
+          selectedPortion = value!;
+        });
+      },
+      items: portions.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: const InputDecoration(
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
+    );
 
     final commentaireField = TextFormField(
       controller: commentaireController,
       autofocus: false,
       maxLines: 2,
       decoration: const InputDecoration(
-        filled: true,
-        fillColor: Color.fromARGB(255, 240, 240, 240),
-        labelText: "Commentaire",
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey)
-        )
-      ),
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Commentaire",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
       onSaved: (value) {
         commentaireController.text = value!;
       },
@@ -181,15 +169,25 @@ class _CookDishPageState extends State<CookDishPage> {
 
     final submitDish = ElevatedButton(
       onPressed: () {
-        print("Envoie des données à la collection");
+        FirebaseFirestore.instance.collection('Plats').add({
+          'name': dishNameController.value.text,
+          'ingredients': ingredientsController.value.text,
+          'place': placeController.value.text,
+          'date': dateController.value.text,
+          'portions': selectedPortion,
+          'commentaire': commentaireController.value.text,
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyApp())
+        );
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
-        fixedSize: const Size(400, 40)
-      ),
+          backgroundColor: Colors.black, fixedSize: const Size(400, 40)),
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-        child: Text('Enregistrer le plat', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        child: Text('Enregistrer le plat',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
       ),
     );
 
@@ -204,7 +202,9 @@ class _CookDishPageState extends State<CookDishPage> {
                     padding: EdgeInsets.only(top: 70, left: 30, bottom: 15),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text("Je cuisine un plat", style: TextStyle(fontWeight: FontWeight.w900, fontSize: 35)),
+                      child: Text("Je cuisine un plat",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 35)),
                     ),
                   ),
                   Stack(
@@ -218,7 +218,8 @@ class _CookDishPageState extends State<CookDishPage> {
                       Positioned(
                         top: 30,
                         left: 170,
-                        child: Image.asset('images/profile_image.png',
+                        child: Image.asset(
+                          'images/profile_image.png',
                           width: MediaQuery.of(context).size.width * 0.22,
                         ),
                       ),
@@ -233,38 +234,33 @@ class _CookDishPageState extends State<CookDishPage> {
                           Container(
                             margin: const EdgeInsets.only(top: 20),
                             child: const Align(
-                              child: Text("* champ obligatoire", style: TextStyle(color: Colors.grey),),
-                              alignment: Alignment.centerLeft
-                            ),
+                                child: Text(
+                                  "* champ obligatoire",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                alignment: Alignment.centerLeft),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            child: dishNameField
-                          ),
+                              margin: const EdgeInsets.only(top: 10),
+                              child: dishNameField),
                           Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            child: ingredientsField
-                          ),
+                              margin: const EdgeInsets.only(top: 20),
+                              child: ingredientsField),
                           Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            child: placeField
-                          ),
+                              margin: const EdgeInsets.only(top: 20),
+                              child: placeField),
                           Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            child: dateField
-                          ),
+                              margin: const EdgeInsets.only(top: 20),
+                              child: dateField),
                           Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            child: portionsField
-                          ),
+                              margin: const EdgeInsets.only(top: 20),
+                              child: portionsField),
                           Container(
-                            margin: const EdgeInsets.only(top: 20),
-                            child: commentaireField
-                          ),
+                              margin: const EdgeInsets.only(top: 20),
+                              child: commentaireField),
                           Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            child: submitDish
-                          ),
+                              margin: const EdgeInsets.only(top: 10),
+                              child: submitDish),
                         ],
                       ),
                     ),
@@ -275,17 +271,16 @@ class _CookDishPageState extends State<CookDishPage> {
           ),
         ),
 
-      // if(isLoading)
-      //   const Opacity(
-      //     opacity: 0.8,
-      //     child: ModalBarrier(dismissible: false, color: Colors.black),
-      //   ),
-      // if(isLoading)
-      //   const Center(
-      //     child: CircularProgressIndicator(),
-      //   ),
+        // if(isLoading)
+        //   const Opacity(
+        //     opacity: 0.8,
+        //     child: ModalBarrier(dismissible: false, color: Colors.black),
+        //   ),
+        // if(isLoading)
+        //   const Center(
+        //     child: CircularProgressIndicator(),
+        //   ),
       ],
-
     );
   }
 }
