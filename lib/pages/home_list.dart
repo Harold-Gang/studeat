@@ -27,8 +27,10 @@ class PlatsInformation extends StatefulWidget {
 }
 
 class _PlatsInformationState extends State<PlatsInformation> {
-  final Stream<QuerySnapshot> _platsStream =
-      FirebaseFirestore.instance.collection('Plats').snapshots();
+  final Stream<QuerySnapshot> _platsStream = FirebaseFirestore.instance
+      .collection('Plats')
+      .orderBy('date')
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

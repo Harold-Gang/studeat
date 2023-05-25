@@ -19,6 +19,8 @@ class _CookDishPageState extends State<CookDishPage> {
 
   // Controllers
   final dishNameController = TextEditingController();
+  final dishPriceController = TextEditingController();
+  final dishImageController = TextEditingController();
   final ingredientsController = TextEditingController();
   final placeController = TextEditingController();
   final dateController = TextEditingController();
@@ -51,6 +53,50 @@ class _CookDishPageState extends State<CookDishPage> {
       validator: (value) {
         if (value!.isEmpty) {
           return ("Remplissez le champ Nom du plat");
+        }
+        return null;
+      },
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.name,
+    );
+
+    final dishPriceField = TextFormField(
+      controller: dishPriceController,
+      autofocus: false,
+      decoration: const InputDecoration(
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Prix de la part*",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
+      onSaved: (value) {
+        dishPriceController.text = value!;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Remplissez le champ Prix de la part*");
+        }
+        return null;
+      },
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.name,
+    );
+
+    final dishImageField = TextFormField(
+      controller: dishImageController,
+      autofocus: false,
+      decoration: const InputDecoration(
+          filled: true,
+          fillColor: Color.fromARGB(255, 240, 240, 240),
+          labelText: "Image*",
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
+      onSaved: (value) {
+        dishImageController.text = value!;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Remplissez le champ Image");
         }
         return null;
       },
@@ -171,6 +217,8 @@ class _CookDishPageState extends State<CookDishPage> {
       onPressed: () {
         FirebaseFirestore.instance.collection('Plats').add({
           'name': dishNameController.value.text,
+          'prix': dishPriceController.value.text,
+          'image': dishImageController.value.text,
           'ingredients': ingredientsController.value.text,
           'place': placeController.value.text,
           'date': dateController.value.text,
@@ -192,7 +240,7 @@ class _CookDishPageState extends State<CookDishPage> {
     return Stack(
       children: [
         Scaffold(
-          body: Column(
+          body: ListView(
             children: <Widget>[
               Column(
                 children: [
@@ -253,6 +301,12 @@ class _CookDishPageState extends State<CookDishPage> {
                           Container(
                               margin: const EdgeInsets.only(top: 20),
                               child: portionsField),
+                          Container(
+                              margin: const EdgeInsets.only(top: 20),
+                              child: dishPriceField),
+                          Container(
+                              margin: const EdgeInsets.only(top: 20),
+                              child: dishImageField),
                           Container(
                               margin: const EdgeInsets.only(top: 20),
                               child: commentaireField),
