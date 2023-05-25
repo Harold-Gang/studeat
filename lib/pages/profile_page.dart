@@ -3,14 +3,52 @@ import 'package:app/pages/profile_infos.dart';
 import 'package:app/pages/command_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:app/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfilePage extends StatelessWidget {
-  ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
 
-  final User? user = Auth().currentUser;
+class _ProfilePageState extends State<ProfilePage> {
+  User? user;
+  Map<String, dynamic>? userData;
+
+  @override
+  void initState() {
+    super.initState();
+    user = Auth().currentUser;
+    fetchUserData();
+  }
 
   Future<void> signOut() async {
     await Auth().signout();
+  }
+
+  Future<void> fetchUserData() async {
+    if (user != null) {
+      String userId = user!.uid;
+      CollectionReference usersCollection =
+          FirebaseFirestore.instance.collection('users');
+
+      try {
+        DocumentSnapshot userSnapshot = await usersCollection.doc(userId).get();
+
+        if (userSnapshot.exists) {
+          setState(() {
+            userData = userSnapshot.data() as Map<String, dynamic>?;
+            print(userData);
+          });
+
+        } else {
+          print('User data not found in Firestore');
+        }
+      } catch (e) {
+        print('Error fetching user data: $e');
+      }
+    } else {
+      print('User is not logged in');
+    }
   }
 
   _signOutButton() {
@@ -23,14 +61,14 @@ class ProfilePage extends StatelessWidget {
   }
 
   _userId() {
-    return Text(user?.email ?? "User email");
+    return Padding(padding: const EdgeInsets.only(left: 25), child: Text(user?.email ?? "User email"),);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Column(
+      body: SafeArea(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -43,10 +81,10 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.only(top: 20, left: 20),
               child: Image(image: NetworkImage('https://picsum.photos/150')),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, left: 20),
-              child: Text("Tom Louveau",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20),
+              child: Text(userData != null ? userData!['firstName'] + " " + userData!['lastName'] : '',
+                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             ),
             _userId(),
             const Padding(
@@ -56,9 +94,12 @@ class ProfilePage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileInfos()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileInfos(),
+                      settings: RouteSettings(arguments: userData)
+                    ),
+                );
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,7 +121,7 @@ class ProfilePage extends StatelessWidget {
                       Icons.keyboard_arrow_right,
                       size: 35,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -91,9 +132,9 @@ class ProfilePage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CommandePage()));
+                  context,
+                  MaterialPageRoute(builder: (context) => const CommandePage()),
+                );
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -115,7 +156,7 @@ class ProfilePage extends StatelessWidget {
                       Icons.keyboard_arrow_right,
                       size: 35,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -139,7 +180,7 @@ class ProfilePage extends StatelessWidget {
                     Icons.keyboard_arrow_right,
                     size: 35,
                   ),
-                )
+                ),
               ],
             ),
             Row(
@@ -162,7 +203,7 @@ class ProfilePage extends StatelessWidget {
                     Icons.keyboard_arrow_right,
                     size: 35,
                   ),
-                )
+                ),
               ],
             ),
             const Padding(
@@ -182,7 +223,7 @@ class ProfilePage extends StatelessWidget {
                     Icons.keyboard_arrow_right,
                     size: 35,
                   ),
-                )
+                ),
               ],
             ),
             Row(
@@ -198,13 +239,16 @@ class ProfilePage extends StatelessWidget {
                     Icons.keyboard_arrow_right,
                     size: 35,
                   ),
-                )
+                ),
               ],
             ),
             Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: _signOutButton())
-          ]),
-    ));
+              padding: const EdgeInsets.only(left: 30),
+              child: _signOutButton(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
