@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/order_page.dart';
+import 'package:intl/intl.dart';
 
 class MealPage extends StatefulWidget {
   const MealPage({super.key});
@@ -112,7 +113,8 @@ class _MealPageState extends State<MealPage> {
             padding: const EdgeInsets.all(20),
             child: Row(
               children: [
-                const Text('Ce plat sera remis en main propre le 3 avril à : ',
+                Text(
+                    'Ce plat sera remis en main propre le ${data['date'] != null ? DateFormat('EEE, M/d/y').format(DateTime.parse(data['date'])) : 'error'}: ',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w200,

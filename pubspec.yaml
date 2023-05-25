@@ -32,6 +32,10 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.17.0
+  flutter_datetime_picker:
+    git:
+      url: https://github.com/hpoul/flutter_datetime_picker
+      ref: 8c893f8594763d96f9b0f83eeb5db164299fdc1d
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -41,7 +45,6 @@ dependencies:
   firebase_auth: ^4.4.0
   cloud_firestore: ^4.5.2
   fluttertoast: ^8.2.1
-  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:
