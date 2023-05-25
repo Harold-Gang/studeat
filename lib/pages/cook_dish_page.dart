@@ -178,9 +178,7 @@ class _CookDishPageState extends State<CookDishPage> {
           'commentaire': commentaireController.value.text,
         });
         Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MyApp())
-        );
+            context, MaterialPageRoute(builder: (context) => const MyApp()));
       },
       style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black, fixedSize: const Size(400, 40)),

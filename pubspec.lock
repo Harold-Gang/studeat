@@ -153,10 +153,11 @@ packages:
   flutter_datetime_picker:
     dependency: "direct main"
     description:
-      name: flutter_datetime_picker
-      sha256: "8e695c63c769350e541951227c2775190ec73ceda774a315b1dc9a99d5facfe5"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "8c893f8594763d96f9b0f83eeb5db164299fdc1d"
+      resolved-ref: "8c893f8594763d96f9b0f83eeb5db164299fdc1d"
+      url: "https://github.com/hpoul/flutter_datetime_picker"
+    source: git
     version: "1.5.1"
   flutter_lints:
     dependency: "direct dev"
