@@ -81,6 +81,7 @@ class _PlatsInformationState extends State<PlatsInformation> {
                       height: 100,
                       fit: BoxFit.cover,
                     ),
+                    trailing: Text((data['prix'] ?? '0') + '€'),
                   ),
                 ));
           }).toList(),
