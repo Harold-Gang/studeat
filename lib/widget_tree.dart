@@ -2,6 +2,7 @@ import 'package:app/auth.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/pages/profile_page.dart';
 import 'package:app/pages/login_page.dart';
+import 'package:app/pages/cook_dish_page.dart';
 import 'package:flutter/material.dart';
 
 class WidgetTree extends StatefulWidget {
@@ -37,6 +38,7 @@ class _WidgetTreeState extends State<WidgetTree> {
 
           _children = [
             const HomePage(),
+            const CookDishPage(),
             ProfilePage(),
           ];
 
@@ -52,6 +54,10 @@ class _WidgetTreeState extends State<WidgetTree> {
                         BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),
                           label: 'Accueil',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.kitchen),
+                          label: 'Cuisiner',
                         ),
                         BottomNavigationBarItem(
                           icon: Icon(Icons.account_circle_outlined),

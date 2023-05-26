@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height - 350,
+                        height: MediaQuery.of(context).size.height - 380,
                         decoration: const BoxDecoration(
                             border: Border(
                                 top: BorderSide(

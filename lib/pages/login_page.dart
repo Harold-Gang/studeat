@@ -37,7 +37,12 @@ class _LoginPageState extends State<LoginPage> {
                 setState(() {})
               })
           .catchError((e) =>
-              {isLoading = false, Fluttertoast.showToast(msg: e!.message)});
+              {
+                Fluttertoast.showToast(msg: e!.message),
+                setState(() {
+                  isLoading = false;
+                })
+              });
     }
   }
 

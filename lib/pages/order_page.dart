@@ -1,3 +1,7 @@
+import 'package:app/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class OrderPage extends StatefulWidget {
@@ -14,6 +18,19 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = Auth().currentUser;
+
+    final Map<String, dynamic> plat =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    void order() {
+      FirebaseFirestore.instance
+          .collection('orders')
+          .add({'user_id': user!.uid, 'plat_id': plat['uid']});
+
+      _goBack();
+    }
+
     return Scaffold(
       body: ListView(children: [
         Align(
@@ -48,10 +65,10 @@ class _OrderPageState extends State<OrderPage> {
             thickness: 1,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20, top: 20),
-          child: Text('Hachis Parmentier',
-              style: TextStyle(
+        Padding(
+          padding: const EdgeInsets.only(left: 20, top: 20),
+          child: Text(plat["name"],
+              style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
@@ -98,10 +115,10 @@ class _OrderPageState extends State<OrderPage> {
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20),
-          child: Text('IIM',
-              style: TextStyle(
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Text(plat["place"],
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
@@ -191,18 +208,18 @@ class _OrderPageState extends State<OrderPage> {
         ),
         Padding(
             padding: const EdgeInsets.only(left: 40),
-            child: Row(children: const [
-              Text(
+            child: Row(children: [
+              const Text(
                 "\u2022",
                 style: TextStyle(fontSize: 18),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                 child: Text(
-                  "Ceci est un commentaire",
-                  style: TextStyle(fontSize: 18),
+                  plat["commentaire"] ?? '',
+                  style: const TextStyle(fontSize: 18),
                 ),
               )
             ])),
@@ -214,7 +231,7 @@ class _OrderPageState extends State<OrderPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.black,
                 ),
-                onPressed: _goBack,
+                onPressed: order,
                 child: const Padding(
                   padding: EdgeInsets.all(8),
                   child: Text(

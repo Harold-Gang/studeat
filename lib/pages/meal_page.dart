@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/pages/order_page.dart';
+import 'package:intl/intl.dart';
 
 class MealPage extends StatefulWidget {
   const MealPage({super.key});
@@ -12,13 +13,6 @@ class _MealPageState extends State<MealPage> {
   bool isToggled = false;
   bool? isChecked = false;
   List<String> ingredients = [];
-
-  void _goToOrder() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const OrderPage()),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +30,7 @@ class _MealPageState extends State<MealPage> {
               children: [
                 Stack(alignment: Alignment.bottomRight, children: [
                   Image.network(
-                    data['image'],
+                    data['image'] ?? 'https://picsum.photos/250?image=9',
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: 300.0,
@@ -87,15 +81,15 @@ class _MealPageState extends State<MealPage> {
                     color: Colors.black,
                     decoration: TextDecoration.none)),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text('🐛 Aux insectes',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black,
-                    decoration: TextDecoration.none)),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.only(left: 20),
+          //   child: Text('🐛 Aux insectes',
+          //       style: TextStyle(
+          //           fontSize: 18,
+          //           fontWeight: FontWeight.w300,
+          //           color: Colors.black,
+          //           decoration: TextDecoration.none)),
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 20, right: 250),
             child: SizedBox(
@@ -104,23 +98,31 @@ class _MealPageState extends State<MealPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isToggled ? Colors.blue : Colors.black,
                   ),
-                  onPressed: _goToOrder,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OrderPage(),
+                          settings: RouteSettings(arguments: data)),
+                    );
+                  },
                   child: const Text("Je réserve")),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
-              children: const [
-                Text('Ce plat sera remis en main propre le 3 avril à : ',
+              children: [
+                Text(
+                    'Ce plat sera remis en main propre le ${data['date'] != null ? DateFormat('EEE, M/d').format(DateTime.parse(data['date'])) : 'error'}: ',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w200,
                         fontStyle: FontStyle.italic,
                         color: Colors.black,
                         decoration: TextDecoration.none)),
-                Text('IIM',
-                    style: TextStyle(
+                Text(data['place'],
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         fontStyle: FontStyle.italic,
@@ -210,7 +212,7 @@ class _MealPageState extends State<MealPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const <Widget> [
+                        children: const <Widget>[
                           Text(
                             "Jordan C.",
                             style: TextStyle(
@@ -250,18 +252,18 @@ class _MealPageState extends State<MealPage> {
           ),
           Padding(
               padding: const EdgeInsets.only(left: 40),
-              child: Row(children: const [
-                Text(
+              child: Row(children: [
+                const Text(
                   "\u2022",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Text(
-                    "Ceci est un commentaire",
-                    style: TextStyle(fontSize: 18),
+                    data['commentaire'] ?? '',
+                    style: const TextStyle(fontSize: 18),
                   ),
                 )
               ])),

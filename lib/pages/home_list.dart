@@ -27,8 +27,10 @@ class PlatsInformation extends StatefulWidget {
 }
 
 class _PlatsInformationState extends State<PlatsInformation> {
-  final Stream<QuerySnapshot> _platsStream =
-      FirebaseFirestore.instance.collection('Plats').snapshots();
+  final Stream<QuerySnapshot> _platsStream = FirebaseFirestore.instance
+      .collection('Plats')
+      .orderBy('date')
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -75,7 +77,8 @@ class _PlatsInformationState extends State<PlatsInformation> {
                     subtitle: Text(data['ingredients'],
                         maxLines: 1, overflow: TextOverflow.ellipsis),
                     leading: Image.network(
-                      data['image'],
+                      // data image or url
+                      data['image'] ?? "https://picsum.photos/250?image=9",
                       width: 80,
                       height: 100,
                       fit: BoxFit.cover,
