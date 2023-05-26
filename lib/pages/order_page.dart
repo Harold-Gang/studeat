@@ -1,3 +1,7 @@
+import 'package:app/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class OrderPage extends StatefulWidget {
@@ -14,8 +18,18 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = Auth().currentUser;
+
     final Map<String, dynamic> plat =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    void order() {
+      FirebaseFirestore.instance
+          .collection('orders')
+          .add({'user_id': user!.uid, 'plat_id': plat['uid']});
+
+      _goBack();
+    }
 
     return Scaffold(
       body: ListView(children: [
@@ -217,7 +231,7 @@ class _OrderPageState extends State<OrderPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.black,
                 ),
-                onPressed: _goBack,
+                onPressed: order,
                 child: const Padding(
                   padding: EdgeInsets.all(8),
                   child: Text(

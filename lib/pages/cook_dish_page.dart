@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:uuid/uuid.dart';
 
 import 'home_page.dart';
 
@@ -224,6 +225,7 @@ class _CookDishPageState extends State<CookDishPage> {
           'date': dateController.value.text,
           'portions': selectedPortion,
           'commentaire': commentaireController.value.text,
+          'uid': Uuid().v4().toString(),
         });
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const MyApp()));

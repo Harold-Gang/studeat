@@ -81,15 +81,15 @@ class _MealPageState extends State<MealPage> {
                     color: Colors.black,
                     decoration: TextDecoration.none)),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text('🐛 Aux insectes',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black,
-                    decoration: TextDecoration.none)),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.only(left: 20),
+          //   child: Text('🐛 Aux insectes',
+          //       style: TextStyle(
+          //           fontSize: 18,
+          //           fontWeight: FontWeight.w300,
+          //           color: Colors.black,
+          //           decoration: TextDecoration.none)),
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 20, right: 250),
             child: SizedBox(
@@ -114,7 +114,7 @@ class _MealPageState extends State<MealPage> {
             child: Row(
               children: [
                 Text(
-                    'Ce plat sera remis en main propre le ${data['date'] != null ? DateFormat('EEE, M/d/y').format(DateTime.parse(data['date'])) : 'error'}: ',
+                    'Ce plat sera remis en main propre le ${data['date'] != null ? DateFormat('EEE, M/d').format(DateTime.parse(data['date'])) : 'error'}: ',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w200,

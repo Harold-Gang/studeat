@@ -37,9 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
         if (userSnapshot.exists) {
           setState(() {
             userData = userSnapshot.data() as Map<String, dynamic>?;
-            print(userData);
           });
-
         } else {
           print('User data not found in Firestore');
         }
@@ -61,7 +59,10 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _userId() {
-    return Padding(padding: const EdgeInsets.only(left: 25), child: Text(user?.email ?? "User email"),);
+    return Padding(
+      padding: const EdgeInsets.only(left: 25),
+      child: Text(user?.email ?? "User email"),
+    );
   }
 
   @override
@@ -83,8 +84,12 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20, left: 20),
-              child: Text(userData != null ? userData!['firstName'] + " " + userData!['lastName'] : '',
-                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+              child: Text(
+                  userData != null
+                      ? userData!['firstName'] + " " + userData!['lastName']
+                      : '',
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold)),
             ),
             _userId(),
             const Padding(
@@ -97,8 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => const ProfileInfos(),
-                      settings: RouteSettings(arguments: userData)
-                    ),
+                      settings: RouteSettings(arguments: userData)),
                 );
               },
               child: Row(
